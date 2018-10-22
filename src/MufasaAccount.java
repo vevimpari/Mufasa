@@ -1,3 +1,4 @@
+import java.util.Calendar;
 
 public class MufasaAccount {
 	String steetAddress;
@@ -10,11 +11,9 @@ public class MufasaAccount {
 	String cardHolderName;
 	String cardType;
 	int cardNumber;
-	String expiryDate;
+	ExpiryDate expiryDate;
 
 	int cvc;
-	
-	User user;
 	
 	BankAccount bankAccount;
 	
@@ -38,12 +37,6 @@ public class MufasaAccount {
 		this.cvc = cvc;
 	}
 	
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
 	public String getSteetAddress() {
 		return steetAddress;
 	}
@@ -90,10 +83,25 @@ public class MufasaAccount {
 	public void setCardNumber(int cardNumber) {
 		this.cardNumber = cardNumber;
 	}
-	public String getExpiryDate() {
+
+	public ExpiryDate getExpiryDate() {
 		return expiryDate;
 	}
-	public void setExpiryDate(String string) {
-		this.expiryDate = string;
+	public void setExpiryDate(ExpiryDate expiryDate) {
+		this.expiryDate = expiryDate;
+	}
+	
+	public boolean checkCardExpiry(ExpiryDate expiryDate) {
+		boolean isValid = true;
+		
+		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+		
+		if (expiryDate.getExpYear() < currentYear) {
+			isValid = false;
+		} else if (expiryDate.getExpYear() < currentYear && expiryDate.getExpMonth() < currentMonth) {
+			isValid = false;
+		}
+		return isValid;
 	}
 }

@@ -8,8 +8,6 @@ public class Mufasa {
 
 		boolean isValid = true;
 		
-		System.out.println(cvc);
-		
 		if (String.valueOf(cvc).length() != 3) {
 			isValid = false;
 		}
